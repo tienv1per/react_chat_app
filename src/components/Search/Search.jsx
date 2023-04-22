@@ -1,6 +1,6 @@
 import React from 'react';
 import "./search.scss";
-import Pexel1 from "../../img/pexels-photo-10384486.webp";
+import Pexel1 from "../../img/pexels-photo-6.webp";
 
 const Search = () => {
     return (
