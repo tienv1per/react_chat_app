@@ -7,15 +7,21 @@ import Pexel4 from "../../img/pexels-photo-4.jpeg";
 import { db } from '../../firebase';
 import { onSnapshot, doc } from 'firebase/firestore';
 import { AuthContext } from '../../context/AuthContext';
+import { ChatContext } from '../../context/ChatContext';
 
 const Chats = () => {
     const [chats, setChats] = useState([]);
     const {currentUser} = useContext(AuthContext);
+    const {dispatch} = useContext(ChatContext);
+
+    const handleSelect = (user) => {
+        dispatch({type: "CHANGE_USER", payload: user});
+
+    }
 
     useEffect(() => {
         const getChats = () => {
             const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), (doc) => {
-                console.log("Current data: ", doc.data());
                 setChats(doc.data());
             })
     
@@ -26,13 +32,11 @@ const Chats = () => {
         currentUser.uid && getChats();
     }, [currentUser.uid]);
 
-    console.log(Object.entries(chats));
-
     return (
         <div className='chats'>
             {Object.entries(chats).map((chat) => {
                 return (
-                    <div className='userChat' key={chat[0]}>
+                    <div className='userChat' key={chat[0]} onClick={() => handleSelect(chat[1].userInfo)}>
                         <img src={chat[1].userInfo.photoURL} alt=''/>
                         <div className='userChatInfo'>
                             <span>{chat[1].userInfo.displayName}</span>
