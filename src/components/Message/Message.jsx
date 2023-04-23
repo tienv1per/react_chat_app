@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import "./message.scss";
-import Pexel from "../../img/pexels-photo-7.jpeg";
-import Pexel2 from "../../img/pexels-photo-8.jpeg"
 import { AuthContext } from '../../context/AuthContext';
 import { ChatContext } from '../../context/ChatContext';
 

@@ -51,16 +51,12 @@ const Register = () => {
                     console.log(error);
                     setErr(true);
                 }
-
-
-
             });
 
         } catch (error) {
             console.log(error.message);
             setErr(true);
         }
-
     }
 
     return (
