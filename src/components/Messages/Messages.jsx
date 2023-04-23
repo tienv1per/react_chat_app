@@ -26,14 +26,6 @@ const Messages = () => {
                     <Message message={message} key={message.id}/>
                 )
             })}
-            <Message/>
-            <Message/>
-            <Message/>
-            <Message/>
-            <Message/>
-            <Message/>
-            <Message/>
-            <Message/>
         </div>
     )
 }

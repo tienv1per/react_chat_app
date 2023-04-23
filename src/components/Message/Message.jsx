@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import "./message.scss";
 import Pexel from "../../img/pexels-photo-7.jpeg";
 import Pexel2 from "../../img/pexels-photo-8.jpeg"
@@ -9,15 +9,21 @@ const Message = ({message}) => {
     const {currentUser} = useContext(AuthContext);
     const {data} = useContext(ChatContext);
 
+    const ref = useRef();
+
+    useEffect(() => {
+        ref.current?.scrollIntoView({behavior: "smooth"})
+    }, [message]);
+
     return (
-        <div className='message owner'>
+        <div className={`message ${message.senderId === currentUser.uid} && owner`} ref={ref}>
             <div className='messageInfo'>
-                <img src={Pexel} alt=''/>
+                <img src={message.senderId === currentUser.uid ? currentUser.photoURL : data.user.photoURL} alt=''/>
                 <span>just now</span>
             </div>
             <div className='messageContent'>
-                <p>hello</p>
-                <img src={Pexel2} alt=''/>
+                <p>{message.text}</p>
+                {message.image && <img src={message.image} alt=''/>}
             </div>
         </div>
     )

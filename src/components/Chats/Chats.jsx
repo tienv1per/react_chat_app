@@ -31,18 +31,23 @@ const Chats = () => {
         }
         currentUser.uid && getChats();
     }, [currentUser.uid]);
+    console.log(chats);
 
     return (
         <div className='chats'>
-            {Object.entries(chats).map((chat) => {
+            {Object.entries(chats)?.sort((a, b) => b[1].date - a[1].date).map((chat) => {
+                // console.log(chat[1]);
                 return (
-                    <div className='userChat' key={chat[0]} onClick={() => handleSelect(chat[1].userInfo)}>
+                    <div>
+                        {chat[1].userInfo && <div className='userChat' key={chat[0]} onClick={() => handleSelect(chat[1].userInfo)}>
                         <img src={chat[1].userInfo.photoURL} alt=''/>
-                        <div className='userChatInfo'>
-                            <span>{chat[1].userInfo.displayName}</span>
-                            <p>{chat[1].userInfo.lastMessage?.text}</p>
-                        </div>
+                            <div className='userChatInfo'>
+                                <span>{chat[1].userInfo.displayName}</span>
+                                <p>{chat[1].lastMessage?.text}</p>
+                            </div>
+                        </div>}
                     </div>
+                   
                 )
             })}
         </div>
